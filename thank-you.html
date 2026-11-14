@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>You are registered.</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="thanks">
+
+<main class="wrap">
+
+  <section>
+    <h1>You are registered.</h1>
+    <p class="sub js-event">You are on the list for the free live call on [DATE] at [TIME CT].</p>
+    <!-- href comes from ADDEVENT_LINK in config.js -->
+    <a class="btn" id="cal-btn" href="#">Add the call to my calendar</a>
+  </section>
+
+  <section>
+    <ol class="steps">
+      <li>Check your email. Your confirmation and your link to join are on the way.</li>
+      <li>Look in your spam or promotions folder if you do not see it in a few minutes.</li>
+      <li>If you chose text reminders, you will get one before the call.</li>
+      <!-- Step 4 shows only for US numbers (?geo=us or ?phone=+1...). Hidden by default. -->
+      <li id="step-call">A member of the Pured Media team may call the number you gave us about your registration or about booking a one-on-one call.</li>
+      <li>On <span class="js-event">[DATE]</span>, join us live. Have one question ready.</li>
+    </ol>
+    <p id="sender-line"></p>
+  </section>
+
+  <footer>
+    <div class="small">
+      <p><a data-link="terms" href="#">Terms</a> · <a data-link="privacy" href="#">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+</main>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
