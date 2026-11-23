@@ -21,7 +21,7 @@ window.BF26_CONFIG = {
 
   // Community review cards that have a written OK from the member (ids: dawn, jose, missy, jayson, christina, bridget).
   // Add an id only after the member's reply is saved. Empty = reviews section hidden.
-  REVIEWS_APPROVED: [],
+  REVIEWS_APPROVED: ["dawn", "jose", "missy", "jayson", "christina", "bridget"],
 
   // Optional lines. Set to false to hide a line.
   SHOW_HOSTS_BLOCK: true,          // "Your hosts" block
