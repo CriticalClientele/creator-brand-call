@@ -516,3 +516,13 @@ html.modal-open,html.modal-open body{overflow:hidden}
   .kicker{letter-spacing:.05em;gap:10px}
   .kicker::before,.kicker::after{flex:0 0 26px}
 }
+
+/* ===== v8: softer background. Near-white pastel tints, no navy band, gentle blobs ===== */
+.band-hero{--band-bg:linear-gradient(180deg,#FFF9F0 0%,#FFF9F0 55%,#F8F7F4 100%)}
+.band-plan{--band-bg:linear-gradient(180deg,#F8F7F4 0%,#F2F6FB 35%,#F2F6FB 65%,#F5F3FA 100%)}
+.band-hosts{--band-bg:linear-gradient(180deg,#F5F3FA 0%,#F7F3FB 35%,#F7F3FB 65%,#FAF4F3 100%)}
+.band-reviews{--band-bg:linear-gradient(180deg,#FAF4F3 0%,#FCF6EE 35%,#FCF6EE 100%)}
+.band-form,#reviews[hidden]+.band-form{--band-bg:linear-gradient(180deg,#FCF6EE 0%,#F1F3F8 30%,#F1F3F8 70%,#F6F3ED 100%);padding-top:80px;padding-bottom:90px}
+.band-foot{--band-bg:#F6F3ED}
+.band-form .card{box-shadow:0 18px 44px rgba(22,58,107,.10),0 0 0 4px rgba(242,213,143,.22)}
+.blobs i{opacity:.32}
