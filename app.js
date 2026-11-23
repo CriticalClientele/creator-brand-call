@@ -102,6 +102,7 @@
     });
     track.lead_source = track.utm_source;
     track.landing_page_url = location.href.split("#")[0];
+    track.referrer = (document.referrer || "").split("?")[0].slice(0, 200);
 
     /* hidden inputs in the preview form */
     document.querySelectorAll("input[data-track]").forEach(function (i) {
