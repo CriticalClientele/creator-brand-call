@@ -89,7 +89,13 @@ footer .small a{margin-right:14px}
 }
 html{scroll-behavior:smooth}
 body{overflow-x:hidden;
-  background:radial-gradient(900px 500px at 50% -120px,#FFF3D6 0%,rgba(255,243,214,0) 70%) no-repeat,var(--bg)}
+  min-height:100vh;
+  background:
+    radial-gradient(900px 500px at 50% -120px,#FFF3D6 0%,rgba(255,243,214,0) 70%) no-repeat,
+    radial-gradient(700px 600px at 0% 40%,rgba(31,78,140,.10) 0%,rgba(31,78,140,0) 70%) no-repeat,
+    radial-gradient(700px 600px at 100% 70%,rgba(242,184,75,.16) 0%,rgba(242,184,75,0) 70%) no-repeat,
+    linear-gradient(180deg,#FFF8EA 0%,#FAF8F4 25%,#EEF2F8 55%,#FBF1DC 80%,#F3EEE4 100%);
+  background-color:var(--bg)}
 
 /* buttons: gradient, shine sweep */
 .btn{position:relative;overflow:hidden;
