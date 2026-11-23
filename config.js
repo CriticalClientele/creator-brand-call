@@ -2,8 +2,8 @@
    Empty string = placeholder stays visible on the page. */
 window.BF26_CONFIG = {
   // Replace the [DATE] and [TIME CT] placeholders everywhere 
-  EVENT_DATE: "",            // e.g. "Thursday, December 4"
-  EVENT_TIME: "",            // e.g. "7:00 PM CT"  (fills the "[TIME CT]" slot)
+  EVENT_DATE: "Tuesday, December 1",
+  EVENT_TIME: "7:00 PM CT",          // e.g. "7:00 PM CT"  (fills the "[TIME CT]" slot)
 
   // GHL form: paste the form's hosted URL (the iframe src from GHL > Sites > Forms > Integrate).
   // Example: "https://api.leadconnectorhq.com/widget/form/AbCdEf123"

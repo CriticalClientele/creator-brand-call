@@ -180,6 +180,9 @@ ol.steps li::before{background:linear-gradient(135deg,#FFE9B8,#F2B84B);color:var
   .blobs i:nth-child(1){left:40px}
   .blobs i:nth-child(2){right:40px}
 }
+@media(max-width:480px){
+  .chip{max-width:100%;font-size:13px;letter-spacing:.02em;line-height:1.35;text-align:left;border-radius:18px;padding:8px 14px}
+}
 @media(max-width:380px){
   .hosts{gap:10px}
   .hcard{padding:18px 10px}
