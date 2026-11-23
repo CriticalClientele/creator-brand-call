@@ -1,7 +1,7 @@
 (function () {
   /* scroll reveal: hides only when IntersectionObserver exists; fails safe */
   try {
-    var els = document.querySelectorAll(".kicker,.tile,.badge-row,.hcard,.card,.steps li,.wall,.reviews-note");
+    var els = document.querySelectorAll(".kicker,.side,.side-join,.tile,.badge-row,.hcard,.card,.steps li,.wall,.reviews-note");
     if (!("IntersectionObserver" in window) || !els.length) return;
     els.forEach(function (el) {
       el.classList.add("reveal");
@@ -16,6 +16,20 @@
     els.forEach(function (el) { io.observe(el); });
     setTimeout(function () { els.forEach(show); }, 6000);
   } catch (err) { document.documentElement.classList.remove("js-reveal"); }
+})();
+(function () {
+  /* gold x in the lockup line (cosmetic; harmless if absent) */
+  try {
+    var ll = document.querySelector(".lockup-line");
+    if (ll && ll.textContent.indexOf("×") > -1) {
+      var parts = ll.textContent.split("×");
+      ll.textContent = "";
+      parts.forEach(function (t, i) {
+        if (i) { var g = document.createElement("span"); g.className = "gx"; g.textContent = "×"; ll.appendChild(g); }
+        ll.appendChild(document.createTextNode(t));
+      });
+    }
+  } catch (e) {}
 })();
 (function () {
   var C = window.BF26_CONFIG || {};
@@ -47,12 +61,12 @@
     /* ---- headline / subhead / Max line swaps ---- */
     var swaps = {
       austin: {
-        h: "Trybe creators: how to go after brand work",
-        s: "Austin and Max go live to cover Trybe and brand work. Bring questions."
+        h: "Austin and Max team up. See the classic UGC side too.",
+        s: "Austin covers Trybe. Max covers classic UGC. Free and live."
       },
       max: {
-        h: "Moms 40+: how to make UGC for brands",
-        s: "UGC is simple videos made for brands. Max and Austin show how it works.",
+        h: "Max and Austin team up. See two ways to work with brands.",
+        s: "Max covers classic UGC. Austin covers Trybe brand campaigns. Free, live.",
         maxLine: "founder of Pured Media, which teaches UGC to moms 40+."
       }
     };
