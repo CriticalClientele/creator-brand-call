@@ -412,3 +412,16 @@ html[data-mood=foot] .washes [data-w=foot]{opacity:1}
 .shot.quote figcaption b{font-size:17px;color:var(--accent-dark)}
 .shot.quote figcaption span{color:var(--muted)}
 .shot.quote[data-id="dawn"] figcaption b{color:var(--accent)}
+
+/* ===== v6: softer, seamless section fades (overrides v5) =====
+   Each band's top/bottom colour equals its neighbour's, so sections melt into each other.
+   Light seams use the midpoint of the two section tones; the navy form band fades in and out itself. */
+.band>.wave{display:none}
+.washes{display:none}
+.band-hero{--band-bg:linear-gradient(180deg,#FFF6E6 0%,#FFF6E6 55%,#F4F4F1 100%)}
+.band-plan{--band-bg:linear-gradient(180deg,#F4F4F1 0%,#EAF2FC 30%,#EAF2FC 70%,#EEEFFB 100%)}
+.band-hosts{--band-bg:linear-gradient(180deg,#EEEFFB 0%,#F2EDFA 30%,#F2EDFA 70%,#F7EEEE 100%)}
+.band-reviews{--band-bg:linear-gradient(180deg,#F7EEEE 0%,#FDF0E2 30%,#FDF0E2 100%)}
+.band-form{--band-bg:linear-gradient(180deg,#FDF0E2 0%,#D9D3D2 7%,#8592A8 15%,#3A5079 23%,#16305C 32%,#16305C 70%,#3A5079 79%,#8592A8 88%,#F1ECE2 100%);padding-top:120px;padding-bottom:130px}
+.band-foot{--band-bg:#F1ECE2;padding-top:40px}
+#reviews[hidden]+.band-form{--band-bg:linear-gradient(180deg,#F7EEEE 0%,#D9D3D2 7%,#8592A8 15%,#3A5079 23%,#16305C 32%,#16305C 70%,#3A5079 79%,#8592A8 88%,#F1ECE2 100%)}
