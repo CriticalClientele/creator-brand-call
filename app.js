@@ -28,13 +28,13 @@
     /* ---- headline / subhead / Max line swaps ---- */
     var swaps = {
       austin: {
-        h: "Free live call for Trybe creators: how to go after more brand work",
-        s: "Austin and Max go live to show how brand work works on Trybe and beyond, where creators get stuck, and what to do next. Bring your questions."
+        h: "Trybe creators: how to go after brand work",
+        s: "Austin and Max go live to cover Trybe and brand work. Bring questions."
       },
       max: {
-        h: "Free live call for moms and women 40+: how to make UGC videos for brands",
-        s: "Max and Austin go live to show how UGC brand work runs, where beginners get stuck, and how to start. Bring your questions.",
-        maxLine: "Pured Media teaches UGC to moms and women 40 and up."
+        h: "Moms 40+: how to make UGC for brands",
+        s: "UGC is simple videos made for brands. Max and Austin show how it works.",
+        maxLine: "founder of Pured Media, which teaches UGC to moms 40+."
       }
     };
     var sw = swaps[src];

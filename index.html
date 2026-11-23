@@ -11,44 +11,48 @@
 
 <main class="wrap">
 
-  <!-- HERO -->
-  <section>
-    <p class="eyebrow js-event">FREE LIVE CALL · [DATE] · [TIME CT]</p>
+  <!-- 1. PROMISE -->
+  <section class="hero">
+    <div class="duo" aria-hidden="true">
+      <div class="photo">M<img src="assets/max.jpg" alt="" onerror="this.remove()"></div>
+      <div class="photo">A<img src="assets/austin.jpg" alt="" onerror="this.remove()"></div>
+    </div>
+    <p class="chip js-event">FREE LIVE CALL · [DATE] · [TIME CT]</p>
     <h1 id="headline">How creators work with brands on UGC videos</h1>
-    <!-- Alternate headline: "Free live call: how creators work with brands on UGC videos" -->
-    <p class="sub" id="subhead">Max and Austin will go live and show you how UGC brand work really runs, where new creators get stuck, and how to go after your first or next brand deal. Bring your questions.</p>
+    <p class="sub" id="subhead">UGC: simple videos creators make for brands. Hosted by Max and Austin.</p>
     <a class="btn" href="#register">Register for the free call</a>
   </section>
 
-  <!-- ON THIS CALL -->
+  <!-- 2. PLAN -->
   <section>
-    <h2>On this call, you will see</h2>
-    <ol class="points">
-      <li>How brands pick the creators they work with, and what they ask for.</li>
-      <li>The places new creators most often get stuck, and what to do about each one.</li>
-      <li>How Trybe campaigns work, and how classic UGC for brands works, side by side.</li>
-      <li>How to make a simple video a brand can actually use.</li>
-      <li>Live questions and answers. Max and Austin take as many as time allows.</li>
-    </ol>
+    <p class="kicker">On the call</p>
+    <ul class="tiles">
+      <li class="tile"><div class="ico" aria-hidden="true">🔍</div><div><b>How brands pick creators</b><span>And what they ask for.</span></div></li>
+      <li class="tile"><div class="ico" aria-hidden="true">🚧</div><div><b>Where new creators get stuck</b><span>And what to do about it.</span></div></li>
+      <li class="tile"><div class="ico" aria-hidden="true">🎬</div><div><b>Make a video brands could use</b><span>A simple one, start to finish.</span></div></li>
+    </ul>
+    <p class="badge-row"><span class="badge">💬 Live Q&amp;A</span></p>
   </section>
 
-  <!-- HOSTS. Hide via SHOW_HOSTS_BLOCK in config.js -->
+  <!-- 3. BIO. Hide via SHOW_HOSTS_BLOCK in config.js -->
   <section id="hosts">
-    <h2>Your hosts</h2>
-    <div class="host">
-      <div class="photo" aria-hidden="true">M<img src="assets/max.jpg" alt="" onerror="this.remove()"></div>
-      <p id="max-line"><strong>Max</strong>, <span id="max-line-text">founder of Pured Media. Max teaches UGC and coaches creators who want to work with brands.</span></p>
-    </div>
-    <div class="host">
-      <div class="photo" aria-hidden="true">A<img src="assets/austin.jpg" alt="" onerror="this.remove()"></div>
-      <p><strong>Austin McCoo</strong>, who runs Whitelist Wealth, a Skool community for creators who work with brands on Trybe.</p>
+    <p class="kicker">Your hosts</p>
+    <div class="hosts">
+      <div class="hcard">
+        <div class="photo" aria-hidden="true">M<img src="assets/max.jpg" alt="" onerror="this.remove()"></div>
+        <b>Max</b><span id="max-line-text">Founder of Pured Media. Teaches UGC and coaches creators.</span>
+      </div>
+      <div class="hcard">
+        <div class="photo" aria-hidden="true">A<img src="assets/austin.jpg" alt="" onerror="this.remove()"></div>
+        <b>Austin McCoo</b><span>Runs Whitelist Wealth, a Skool community for Trybe creators.</span>
+      </div>
     </div>
   </section>
 
   <!-- REGISTER -->
   <section id="register">
     <div class="card">
-      <p class="disclosure">At the end, we will show you how to book a short call with our team if you want one-on-one coaching help. No pressure and no obligation.</p>
+      <p class="intro">At the end, we will show how to book a call with our team about one-on-one coaching. Optional.</p>
 
       <!-- ============ GHL FORM EMBED SLOT ============
            Set GHL_FORM_URL in config.js. The script builds the iframe here and passes
@@ -111,11 +115,10 @@
   <!-- SMALL PRINT -->
   <footer>
     <div class="small">
-      <p>Free to attend. You do not need to buy anything.</p>
-      <p>Results vary. Nothing on this page or on the call promises any income, brand deal or other result.</p>
-      <p><span id="sentence-separate">This call is hosted together by Pured Media and Whitelist Wealth, which are separate companies.</span> <span id="sentence-fee">Whitelist Wealth may earn a fee if you join a program offered on this call.</span></p>
-      <p>We will email your link to join. Add the call to your calendar after you register.</p>
-      <p><a data-link="terms" href="#">Terms</a> · <a data-link="privacy" href="#">Privacy Policy</a></p>
+      <p>Free to attend. No purchase needed.</p>
+      <p>Results vary. No income, brand deal or other result is promised.</p>
+      <p><span id="sentence-separate">Hosted by Pured Media and Whitelist Wealth, separate companies.</span> <span id="sentence-fee">Whitelist Wealth may earn a fee if you join a program offered on this call.</span></p>
+      <p><a data-link="terms" href="#">Terms</a> · <a data-link="privacy" href="#">Privacy</a></p>
     </div>
   </footer>
 
