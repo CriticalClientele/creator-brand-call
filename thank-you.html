@@ -6,33 +6,70 @@
 <meta name="robots" content="noindex, nofollow">
 <title>You are registered.</title>
 <link rel="stylesheet" href="styles.css">
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body data-page="thanks">
 
-<main class="wrap">
+<main>
 
-  <section>
+  <!-- 1. CONFIRMATION -->
+  <section class="band band-hero hero" data-mood="hero">
+    <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+    <div class="lockup lockup-sm" aria-hidden="true">
+      <div class="lockup-row">
+        <figure class="lk lk-max">
+          <div class="lk-photo">M<img src="assets/max.jpg" alt="" onerror="this.remove()"></div>
+        </figure>
+        <div class="lk-x"><span>&times;</span></div>
+        <figure class="lk lk-austin">
+          <div class="lk-photo">A<img src="assets/austin.jpg" alt="" onerror="this.remove()"></div>
+        </figure>
+      </div>
+    </div>
+    <div class="cheer" aria-hidden="true">
+      <i style="--x:-74px;--y:-46px;--r:35deg;--d:.75s" class="c1"></i>
+      <i style="--x:-58px;--y:-76px;--r:-20deg;--d:.82s" class="c2"></i>
+      <i style="--x:-14px;--y:-92px;--r:60deg;--d:.7s" class="c3"></i>
+      <i style="--x:38px;--y:-84px;--r:-40deg;--d:.88s" class="c1"></i>
+      <i style="--x:76px;--y:-50px;--r:15deg;--d:.78s" class="c2"></i>
+      <i style="--x:84px;--y:-6px;--r:70deg;--d:.72s" class="c3"></i>
+      <i style="--x:68px;--y:40px;--r:-30deg;--d:.9s" class="c1"></i>
+      <i style="--x:34px;--y:72px;--r:50deg;--d:.8s" class="c2"></i>
+      <i style="--x:-22px;--y:76px;--r:-60deg;--d:.74s" class="c3"></i>
+      <i style="--x:-64px;--y:52px;--r:25deg;--d:.86s" class="c1"></i>
+      <i style="--x:-86px;--y:4px;--r:-10deg;--d:.76s" class="c2"></i>
+      <i style="--x:-40px;--y:-70px;--r:80deg;--d:.84s" class="c3"></i>
+      <div class="cheer-badge"><svg viewBox="0 0 52 52" focusable="false"><path pathLength="1" d="M14 27.5 L22.5 36 L39 17"/></svg></div>
+    </div>
     <h1>You are registered.</h1>
     <p class="sub js-event">You are in. Max and Austin go live together on [DATE] at [TIME CT].</p>
     <!-- href comes from ADDEVENT_LINK in config.js -->
-    <a class="btn" id="cal-btn" href="#">Add the call to my calendar</a>
+    <a class="btn btn-cal" id="cal-btn" href="#"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Add the call to my calendar</span></a>
+    </div>
   </section>
 
-  <section>
-    <ol class="steps">
-      <li>Check your email. Your confirmation and your link to join are on the way.</li>
-      <li>Look in your spam or promotions folder if you do not see it in a few minutes.</li>
-      <li>If you chose text reminders, you will get one before the call.</li>
+  <!-- 2. STEPS -->
+  <section class="band band-plan" data-mood="plan">
+    <div class="wrap">
+    <ol class="steps timeline">
+      <li><span class="st">Check your email. Your confirmation and your link to join are on the way.</span></li>
+      <li><span class="st">Look in your spam or promotions folder if you do not see it in a few minutes.</span></li>
+      <li><span class="st">If you chose text reminders, you will get one before the call.</span></li>
       <!-- Step 4 shows only for US numbers (?geo=us or ?phone=+1...). Hidden by default. -->
-      <li id="step-call">A member of the Pured Media team may call the number you gave us about your registration or about booking a one-on-one call.</li>
-      <li>On <span class="js-event">[DATE]</span>, join us live. Have one question ready.</li>
+      <li id="step-call"><span class="st">A member of the Pured Media team may call the number you gave us about your registration or about booking a one-on-one call.</span></li>
+      <li><span class="st">On <span class="js-event">[DATE]</span>, join us live. Have one question ready.</span></li>
     </ol>
     <p id="sender-line"></p>
+    </div>
   </section>
 
-  <footer>
+  <!-- 3. FOOTER -->
+  <footer class="band band-foot" data-mood="foot">
+    <div class="wrap">
     <div class="small">
       <p><a data-link="terms" href="#">Terms</a> · <a data-link="privacy" href="#">Privacy Policy</a></p>
+    </div>
     </div>
   </footer>
 

@@ -548,3 +548,84 @@ html.modal-open,html.modal-open body{overflow:hidden}
 .band-form{--band-bg:linear-gradient(180deg,#F1E2C6 0%,#DFE5EF 35%,#D2DAE8 65%,#EDE4D3 100%)}
 #reviews[hidden]+.band-form{--band-bg:linear-gradient(180deg,#E4E9F2 0%,#DFE5EF 35%,#D2DAE8 65%,#EDE4D3 100%)}
 .band-foot{--band-bg:linear-gradient(180deg,#EDE4D3 0%,#E6DAC4 100%)}
+
+/* ===== v11: thank-you page (same system as landing: cream / navy / gold, v10 bands, v7 cards) ===== */
+body[data-page=thanks]{background:var(--bg)}
+body[data-page=thanks] .band-plan{--band-bg:linear-gradient(180deg,#FBF0DC 0%,#F4E3C4 45%,#EDE4D3 100%)}
+
+/* small lockup */
+.lockup-sm{margin:0 0 6px}
+.lockup-sm .lockup-row{--lk:clamp(92px,28vw,128px);margin:0}
+.lockup-sm .lk-photo{border-width:5px;font-size:38px}
+.lockup-sm .lk-x{width:44px;height:44px;margin:calc(var(--lk) / 2 - 22px) -12px 0;font-size:28px}
+
+/* check + confetti (CSS only) */
+.cheer{position:relative;width:180px;height:180px;margin:-8px auto 0;display:flex;align-items:center;justify-content:center}
+.cheer-badge{position:relative;z-index:2;width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold) 55%,#A9741A);border:4px solid #fff;
+  box-shadow:0 10px 26px rgba(201,151,58,.5),0 0 0 0 rgba(242,184,75,.7);
+  animation:xpop .7s .3s both cubic-bezier(.3,1.6,.5,1),xglow 3s 1.4s infinite}
+.cheer-badge svg{width:46px;height:46px;overflow:visible}
+.cheer-badge path{fill:none;stroke:#fff;stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 1px 1px rgba(122,78,0,.45));animation:ckdraw .55s .85s both ease-out}
+.cheer i{position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;z-index:1;
+  opacity:0;animation:cfburst var(--d,.8s) .75s both cubic-bezier(.2,.8,.3,1),cftwinkle 3.2s 1.8s ease-in-out infinite}
+.cheer i.c1{background:var(--gold)}
+.cheer i.c2{background:var(--navy-2);width:9px;height:9px;margin:-4.5px 0 0 -4.5px}
+.cheer i.c3{background:var(--gold-light);width:13px;height:6px;margin:-3px 0 0 -6.5px;border-radius:3px}
+.cheer i:nth-child(even){animation-delay:.75s,2.2s}
+.cheer i:nth-child(3n){animation-delay:.75s,2.6s}
+@keyframes cfburst{0%{opacity:0;translate:0 0;scale:.2;rotate:0deg}15%{opacity:1}100%{opacity:1;translate:var(--x) var(--y);scale:1;rotate:var(--r)}}
+@keyframes cftwinkle{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes ckdraw{to{stroke-dashoffset:0}}
+
+/* hero text + button */
+body[data-page=thanks] .hero h1{margin-top:6px}
+body[data-page=thanks] .hero .sub{margin-bottom:28px}
+.btn-cal{display:flex;align-items:center;justify-content:center;gap:12px;max-width:440px;margin:0 auto;min-height:66px;font-size:21px;line-height:1.25;padding:14px 20px}
+.btn-cal svg{flex:0 0 26px}
+
+/* steps: numbered vertical timeline of cards */
+.timeline{position:relative;display:flex;flex-direction:column;gap:20px}
+.timeline::before{content:"";position:absolute;left:38px;top:40px;bottom:40px;width:4px;border-radius:4px;z-index:0;
+  background:linear-gradient(180deg,var(--gold-light),var(--gold),var(--gold-light))}
+ol.steps.timeline li{position:relative;z-index:1;padding:22px 20px 22px 82px;min-height:84px;display:flex;align-items:center;
+  background:#fff;border:1px solid var(--line-w);border-radius:var(--r);box-shadow:var(--sh);
+  font-size:20px;line-height:1.5;color:var(--text);text-wrap:pretty;transition:transform .25s,box-shadow .25s,border-color .25s}
+ol.steps.timeline li::before{left:18px;top:50%;margin-top:-22px;width:44px;height:44px;line-height:44px;font-size:21px;border:3px solid #fff;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold) 60%,#B98424);color:#fff;text-shadow:0 1px 2px rgba(122,78,0,.55);
+  box-shadow:0 6px 14px rgba(201,151,58,.45)}
+ol.steps.timeline li::after{content:"";position:absolute;left:0;right:0;top:0;height:4px;border-radius:var(--r) var(--r) 0 0;background:linear-gradient(90deg,var(--gold),transparent 85%)}
+ol.steps.timeline li:hover,.timeline li:active{transform:translateY(-3px);box-shadow:var(--sh-up);border-color:var(--gold-light)}
+#sender-line{display:table;margin:28px auto 0;max-width:100%;padding:10px 20px;border-radius:999px;text-align:center;font-size:18px;line-height:1.4;font-weight:800;
+  color:var(--gold-dark);background:linear-gradient(135deg,#FFF4DA,#FFE2A0);border:1px solid var(--gold-light);box-shadow:0 6px 16px rgba(201,151,58,.22)}
+@media(max-width:380px){ol.steps.timeline li{padding:20px 16px 20px 74px;font-size:19px}.timeline::before{left:34px}ol.steps.timeline li::before{left:14px}}
+@media(min-width:700px){ol.steps.timeline li{font-size:21px}}
+
+/* ===== v12: exact-centred x + tighter vertical rhythm (one spacing scale for every band) =====
+   x: drawn with two rotated bars so it never depends on a text baseline. */
+.lk-x{--bar:26px;--bar-w:5px}
+.lockup-sm .lk-x{--bar:20px;--bar-w:4px}
+.lk-x span{display:none}
+.lk-x::before,.lk-x::after{content:"";position:absolute;left:50%;top:50%;width:var(--bar);height:var(--bar-w);margin:calc(var(--bar-w) / -2) 0 0 calc(var(--bar) / -2);
+  border-radius:var(--bar-w);background:#fff;box-shadow:0 1px 2px rgba(122,78,0,.45);transform:rotate(45deg)}
+.lk-x::after{transform:rotate(-45deg)}
+@media(min-width:700px){.lk-x{--bar:30px;--bar-w:5px}.lockup-sm .lk-x{--bar:20px;--bar-w:4px}}
+
+:root{--py:48px;--py-top-hero:32px;--py-foot:40px}
+body .band{padding:var(--py) 0}
+body .band.band-hero{padding:var(--py-top-hero) 0 var(--py)}
+body .band.band-form,body #reviews[hidden]+.band-form{padding:var(--py) 0}
+body #hosts.band{padding:var(--py) 0}
+body .band.band-foot{padding:32px 0 var(--py-foot)}
+body .band .kicker{margin-bottom:20px}
+.hosted{margin-bottom:22px}
+.hero .sub{margin-bottom:8px}
+body[data-page=thanks] .hero .sub{margin-bottom:24px}
+@media(min-width:700px){
+  :root{--py:68px;--py-top-hero:48px;--py-foot:48px}
+  body .band,body #hosts.band,body .band.band-form,body #reviews[hidden]+.band-form{padding:var(--py) 0}
+  body .band.band-hero{padding:var(--py-top-hero) 0 var(--py)}
+  body .band.band-foot{padding:44px 0 var(--py-foot)}
+  body .band .kicker{margin-bottom:24px}
+}
