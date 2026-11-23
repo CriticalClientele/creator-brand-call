@@ -539,3 +539,12 @@ html.modal-open,html.modal-open body{overflow:hidden}
 .blobs i:nth-child(2){background:radial-gradient(circle at 60% 40%,#F6DCA4,rgba(246,220,164,0) 70%)}
 .blobs i:nth-child(3){background:radial-gradient(circle,#FFE6BF,rgba(255,230,191,0) 70%)}
 .rm-note:empty{display:none}
+
+/* ===== v10: gradient in shades of cream / gold / navy (lighter + darker) ===== */
+.band-hero{--band-bg:radial-gradient(90% 60% at 50% 0%,#FFFDF8 0%,rgba(255,253,248,0) 70%),linear-gradient(180deg,#FFF8EC 0%,#FBF0DC 100%)}
+.band-plan{--band-bg:linear-gradient(180deg,#FBF0DC 0%,#F4E3C4 45%,#F2E6D2 100%)}
+.band-hosts{--band-bg:linear-gradient(180deg,#F2E6D2 0%,#EEF0F4 40%,#E4E9F2 100%)}
+.band-reviews{--band-bg:linear-gradient(180deg,#E4E9F2 0%,#F6EEDF 45%,#F1E2C6 100%)}
+.band-form{--band-bg:linear-gradient(180deg,#F1E2C6 0%,#DFE5EF 35%,#D2DAE8 65%,#EDE4D3 100%)}
+#reviews[hidden]+.band-form{--band-bg:linear-gradient(180deg,#E4E9F2 0%,#DFE5EF 35%,#D2DAE8 65%,#EDE4D3 100%)}
+.band-foot{--band-bg:linear-gradient(180deg,#EDE4D3 0%,#E6DAC4 100%)}
