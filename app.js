@@ -1,7 +1,7 @@
 (function () {
   /* scroll reveal: hides only when IntersectionObserver exists; fails safe */
   try {
-    var els = document.querySelectorAll(".kicker,.tile,.badge-row,.hcard,.card,.steps li");
+    var els = document.querySelectorAll(".kicker,.tile,.badge-row,.hcard,.card,.steps li,.wall,.reviews-note");
     if (!("IntersectionObserver" in window) || !els.length) return;
     els.forEach(function (el) {
       el.classList.add("reveal");
@@ -64,6 +64,12 @@
         document.getElementById("max-line-text").textContent = sw.maxLine;
       }
     }
+    /* ---- reviews: show the section only if at least one screenshot loaded ---- */
+    var rev = document.getElementById("reviews");
+    if (rev) window.addEventListener("load", function () {
+      var ok = Array.prototype.some.call(rev.querySelectorAll("img"), function (im) { return im.complete && im.naturalWidth > 0; });
+      if (ok) rev.hidden = false;
+    });
     document.title = document.getElementById("headline").textContent;
 
     /* ---- optional-line toggles ---- */
