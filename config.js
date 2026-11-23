@@ -19,6 +19,10 @@ window.BF26_CONFIG = {
   TERMS_URL: "",
   PRIVACY_URL: "",
 
+  // Community review cards that have a written OK from the member (ids: dawn, jose, missy, jayson, christina, bridget).
+  // Add an id only after the member's reply is saved. Empty = reviews section hidden.
+  REVIEWS_APPROVED: [],
+
   // Optional lines. Set to false to hide a line.
   SHOW_HOSTS_BLOCK: true,          // "Your hosts" block
   SHOW_SEPARATE_COMPANIES: true,   // "separate companies" line

@@ -78,12 +78,13 @@
         document.getElementById("max-line-text").textContent = sw.maxLine;
       }
     }
-    /* ---- reviews: show the section only if at least one screenshot loaded ---- */
+    /* ---- reviews: show only cards whose id is in REVIEWS_APPROVED (config.js) ---- */
     var rev = document.getElementById("reviews");
-    if (rev) window.addEventListener("load", function () {
-      var ok = Array.prototype.some.call(rev.querySelectorAll("img"), function (im) { return im.complete && im.naturalWidth > 0; });
-      if (ok) rev.hidden = false;
-    });
+    if (rev) {
+      var okIds = C.REVIEWS_APPROVED || [];
+      rev.querySelectorAll(".shot[data-id]").forEach(function (q) { if (okIds.indexOf(q.getAttribute("data-id")) === -1) q.remove(); });
+      if (rev.querySelector(".shot")) rev.hidden = false;
+    }
     document.title = document.getElementById("headline").textContent;
 
     /* ---- optional-line toggles ---- */
@@ -162,4 +163,28 @@
     }
     if (!show4) document.getElementById("step-call").classList.add("hidden");
   }
+})();
+(function () {
+  /* scroll-driven mood: the band under the middle of the screen sets <html data-mood>.
+     CSS cross-fades the fixed .washes layers. No JS or no IntersectionObserver = static band gradients only. */
+  try {
+    var bands = document.querySelectorAll(".band[data-mood]");
+    if (!("IntersectionObserver" in window) || !bands.length || !document.querySelector(".washes")) return;
+    var root = document.documentElement;
+    var set = function (m) { if (root.getAttribute("data-mood") !== m) root.setAttribute("data-mood", m); };
+    set("hero");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) set(e.target.getAttribute("data-mood")); });
+    }, { rootMargin: "-49% 0px -49% 0px", threshold: 0 });
+    bands.forEach(function (b) { io.observe(b); });
+    /* short last band: when scrolled to the very bottom, call it the footer */
+    var tick = false;
+    window.addEventListener("scroll", function () {
+      if (tick) return; tick = true;
+      requestAnimationFrame(function () {
+        tick = false;
+        if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 4) set("foot");
+      });
+    }, { passive: true });
+  } catch (err) {}
 })();
