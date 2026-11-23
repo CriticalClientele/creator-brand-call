@@ -81,3 +81,112 @@ footer .small a{margin-right:14px}
   .tile{flex-direction:column;text-align:center;padding:24px 16px}
   .duo .photo{width:120px;height:120px;flex-basis:120px}
 }
+
+/* ===== v2 visual + motion upgrade (no text changes) ===== */
+:root{
+  --gold:#C9973A; --gold-light:#F2D58F; --navy-2:#2A63B0;
+  --shadow:0 10px 30px rgba(22,58,107,.10);
+}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden;
+  background:radial-gradient(900px 500px at 50% -120px,#FFF3D6 0%,rgba(255,243,214,0) 70%) no-repeat,var(--bg)}
+
+/* buttons: gradient, shine sweep */
+.btn{position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--navy-2),var(--accent) 55%,var(--accent-dark));
+  box-shadow:0 8px 20px rgba(31,78,140,.28);transition:transform .2s,box-shadow .2s,filter .2s}
+.btn:hover,.btn:focus-visible{background:linear-gradient(135deg,var(--navy-2),var(--accent) 55%,var(--accent-dark));filter:brightness(1.08);transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.99)}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;
+  background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.38),rgba(255,255,255,0));
+  transform:skewX(-20deg);animation:shine 4.5s ease-in-out 1.2s infinite;pointer-events:none}
+.hero .btn{animation:rise .8s .45s both ease-out,pulse 2.8s 1.6s infinite}
+
+/* hero */
+.hero{position:relative}
+.hero>*:not(.blobs){position:relative;z-index:1}
+.blobs{position:absolute;inset:0 -40px;z-index:0;pointer-events:none}
+.blobs i{position:absolute;border-radius:50%;filter:blur(38px);opacity:.6}
+.blobs i:nth-child(1){width:240px;height:240px;left:-10px;top:10px;background:radial-gradient(circle at 35% 35%,#FFD98A,rgba(255,217,138,0) 70%);animation:drift1 14s ease-in-out infinite}
+.blobs i:nth-child(2){width:260px;height:260px;right:-20px;top:60px;background:radial-gradient(circle at 60% 40%,#9DBBE6,rgba(157,187,230,0) 70%);animation:drift2 17s ease-in-out infinite}
+.blobs i:nth-child(3){width:200px;height:200px;left:35%;bottom:-10px;background:radial-gradient(circle,#FFC9A8,rgba(255,201,168,0) 70%);animation:drift3 19s ease-in-out infinite}
+
+.duo .photo,.hcard .photo{border:5px solid transparent;
+  background:linear-gradient(var(--soft),var(--soft)) padding-box,linear-gradient(135deg,var(--gold-light),var(--gold) 45%,var(--navy-2)) border-box;
+  box-shadow:0 8px 22px rgba(22,58,107,.22);font-size:34px}
+.duo .photo{animation:float 5s ease-in-out infinite}
+.duo .photo+.photo{animation-delay:-2.5s}
+.duo{animation:rise .7s both ease-out}
+
+.chip{display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  box-shadow:0 6px 16px rgba(22,58,107,.25);animation:rise .7s .1s both ease-out}
+.chip::before{content:"";flex:0 0 10px;width:10px;height:10px;border-radius:50%;background:#FFC857;animation:dot 1.8s infinite}
+h1{animation:rise .8s .2s both ease-out}
+.hero .sub{animation:rise .8s .32s both ease-out}
+
+/* kicker ornaments (shapes only) */
+.kicker{display:flex;align-items:center;justify-content:center;gap:12px}
+.kicker::before,.kicker::after{content:"";flex:0 1 44px;height:3px;border-radius:3px;
+  background:linear-gradient(90deg,rgba(201,151,58,0),var(--gold))}
+.kicker::after{background:linear-gradient(270deg,rgba(201,151,58,0),var(--gold))}
+
+/* plan tiles */
+.tiles{position:relative}
+.tiles::before{content:"";position:absolute;left:47px;top:44px;bottom:44px;width:0;
+  border-left:3px dotted var(--gold);opacity:.8;z-index:0}
+.tile{position:relative;z-index:1;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s,border-color .25s}
+.tile:hover,.tile:active{transform:translateY(-4px);box-shadow:0 16px 34px rgba(22,58,107,.16);border-color:var(--gold-light)}
+.tile .ico{border-radius:50%;box-shadow:0 6px 14px rgba(22,58,107,.18),inset 0 0 0 3px rgba(255,255,255,.7);
+  background:linear-gradient(135deg,#FFE9B8,#F2B84B)}
+.tile:nth-child(2) .ico{background:linear-gradient(135deg,#DCE8F8,#8FB1E0)}
+.tile:nth-child(3) .ico{background:linear-gradient(135deg,#FFE0CC,#F4A77A)}
+.badge{background:linear-gradient(135deg,#FFF4DA,#FFE2A0);border:1px solid var(--gold-light);
+  box-shadow:0 6px 16px rgba(201,151,58,.25);animation:bounce 3.6s ease-in-out 1s infinite}
+
+/* host cards */
+.hcard{box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s,border-color .25s}
+.hcard:hover,.hcard:active{transform:translateY(-4px);box-shadow:0 16px 34px rgba(22,58,107,.16);border-color:var(--gold-light)}
+.hcard .photo{width:104px;height:104px}
+
+/* form card */
+.card{position:relative;overflow:hidden;border-color:var(--gold-light);padding-top:32px;
+  box-shadow:0 18px 44px rgba(22,58,107,.14),0 0 0 4px rgba(242,213,143,.25)}
+.card::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--navy-2),var(--accent),var(--gold));background-size:200% 100%;
+  animation:slide 8s linear infinite}
+input[type=text],input[type=email],input[type=tel],select{transition:border-color .2s,box-shadow .2s}
+input[type=text]:focus,input[type=email]:focus,input[type=tel]:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(242,184,75,.35)}
+footer{border-top:0;position:relative}
+footer::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,rgba(201,151,58,0),var(--gold),rgba(201,151,58,0))}
+
+/* thank-you steps */
+ol.steps li::before{background:linear-gradient(135deg,#FFE9B8,#F2B84B);color:var(--accent-dark);box-shadow:0 4px 10px rgba(201,151,58,.3)}
+
+/* scroll reveal (active only when JS adds .js-reveal to <html>) */
+.js-reveal .reveal{opacity:0;translate:0 26px;
+  transition:opacity .65s ease-out,translate .65s ease-out,transform .25s,box-shadow .25s,border-color .25s;
+  transition-delay:var(--d,0s),var(--d,0s),0s,0s,0s}
+.js-reveal .reveal.in{opacity:1;translate:0 0}
+
+@media(min-width:700px){
+  .tiles::before{left:16%;right:16%;top:54px;bottom:auto;height:0;border-left:0;border-top:3px dotted var(--gold)}
+  .blobs i:nth-child(1){left:40px}
+  .blobs i:nth-child(2){right:40px}
+}
+@media(max-width:380px){
+  .hosts{gap:10px}
+  .hcard{padding:18px 10px}
+  .tile{padding:16px 14px;gap:14px}
+}
+
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shine{0%,55%{left:-60%}100%{left:130%}}
+@keyframes pulse{0%,100%{box-shadow:0 8px 20px rgba(31,78,140,.28),0 0 0 0 rgba(242,184,75,.6)}50%{box-shadow:0 8px 20px rgba(31,78,140,.28),0 0 0 12px rgba(242,184,75,0)}}
+@keyframes dot{0%{box-shadow:0 0 0 0 rgba(255,200,87,.8)}70%,100%{box-shadow:0 0 0 10px rgba(255,200,87,0)}}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}70%{transform:translateY(-9px)}80%{transform:translateY(0)}88%{transform:translateY(-4px)}}
+@keyframes slide{to{background-position:200% 0}}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.15)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,40px) scale(1.1)}}
+@keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-30px) scale(1.2)}}

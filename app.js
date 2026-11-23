@@ -1,4 +1,23 @@
 (function () {
+  /* scroll reveal: hides only when IntersectionObserver exists; fails safe */
+  try {
+    var els = document.querySelectorAll(".kicker,.tile,.badge-row,.hcard,.card,.steps li");
+    if (!("IntersectionObserver" in window) || !els.length) return;
+    els.forEach(function (el) {
+      el.classList.add("reveal");
+      var i = Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.style.setProperty("--d", (i * 0.12) + "s");
+    });
+    document.documentElement.classList.add("js-reveal");
+    var show = function (el) { el.classList.add("in"); };
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+    setTimeout(function () { els.forEach(show); }, 6000);
+  } catch (err) { document.documentElement.classList.remove("js-reveal"); }
+})();
+(function () {
   var C = window.BF26_CONFIG || {};
   var qs = new URLSearchParams(location.search);
   var page = document.body.getAttribute("data-page");
