@@ -526,3 +526,16 @@ html.modal-open,html.modal-open body{overflow:hidden}
 .band-foot{--band-bg:#F6F3ED}
 .band-form .card{box-shadow:0 18px 44px rgba(22,58,107,.10),0 0 0 4px rgba(242,213,143,.22)}
 .blobs i{opacity:.32}
+
+/* ===== v9: three-colour system (cream / navy / gold). No rainbow ===== */
+.tile:nth-child(n){--tint:#C9973A;--tint-a:#FFF6E2;--tint-b:#F6DCA4}
+.band .kicker,.band-hero .kicker,.band-plan .kicker,.band-hosts .kicker,.band-reviews .kicker{color:var(--accent-dark)}
+.band-hero{--band-bg:linear-gradient(180deg,#FFF9F0 0%,#FFF9F0 60%,#FDF8F1 100%)}
+.band-plan{--band-bg:linear-gradient(180deg,#FDF8F1 0%,#FBF6EE 40%,#FBF6EE 100%)}
+.band-hosts{--band-bg:linear-gradient(180deg,#FBF6EE 0%,#FFFAF3 40%,#FFFAF3 100%)}
+.band-reviews{--band-bg:linear-gradient(180deg,#FFFAF3 0%,#FBF6EE 40%,#FBF6EE 100%)}
+.band-form,#reviews[hidden]+.band-form{--band-bg:linear-gradient(180deg,#FBF6EE 0%,#F7F1E6 40%,#F7F1E6 70%,#F6F1E7 100%)}
+.band-foot{--band-bg:#F6F1E7}
+.blobs i:nth-child(2){background:radial-gradient(circle at 60% 40%,#F6DCA4,rgba(246,220,164,0) 70%)}
+.blobs i:nth-child(3){background:radial-gradient(circle,#FFE6BF,rgba(255,230,191,0) 70%)}
+.rm-note:empty{display:none}
