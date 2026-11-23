@@ -168,6 +168,16 @@
 
 </main>
 
+<!-- review modal (filled by app.js from the clicked card; text is copied, never retyped) -->
+<dialog id="review-modal" class="rmodal" aria-labelledby="rm-name">
+  <div class="rm-top"><button type="button" class="rm-close" aria-label="Close">Close</button></div>
+  <div class="rm-body">
+    <blockquote class="rm-quote"></blockquote>
+    <div class="rm-who"><b id="rm-name"></b><span class="rm-com"></span></div>
+    <p class="rm-note"></p>
+  </div>
+</dialog>
+
 <script src="config.js"></script>
 <script src="app.js"></script>
 </body>

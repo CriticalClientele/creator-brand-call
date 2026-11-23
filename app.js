@@ -188,3 +188,101 @@
     }, { passive: true });
   } catch (err) {}
 })();
+(function () {
+  /* review cards: visual clamp + "Read more" modal. Text is never edited; the full quote stays in the DOM. */
+  try {
+    var rev = document.getElementById("reviews");
+    var dlg = document.getElementById("review-modal");
+    var wall = rev && rev.querySelector(".wall");
+    if (!rev || !dlg || !wall) return;
+    var cards = Array.prototype.slice.call(wall.querySelectorAll(".shot"));
+    if (!cards.length) return;
+    var note = rev.querySelector(".reviews-note");
+    var last = null;
+
+    cards.forEach(function (c) {
+      var name = c.querySelector("figcaption b").textContent;
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "more"; b.textContent = "Read more";
+      b.setAttribute("aria-label", "Read more: full review from " + name);
+      b.setAttribute("aria-haspopup", "dialog");
+      c.appendChild(b);
+    });
+
+    function measure() {
+      if (rev.hidden) return;
+      cards.forEach(function (c) {
+        var q = c.querySelector("blockquote");
+        c.classList.remove("clamped"); c.classList.add("measuring");
+        c.classList.add("clamped");
+        var over = q.scrollHeight > q.clientHeight + 1;
+        c.classList.toggle("clamped", over);
+        c.classList.remove("measuring");
+      });
+    }
+    measure();
+    window.addEventListener("load", measure);
+    window.addEventListener("resize", measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+    function lock(on) {
+      document.documentElement.classList.toggle("modal-open", on);
+    }
+    function open(card, trigger) {
+      last = trigger || card.querySelector(".more");
+      dlg.querySelector(".rm-quote").textContent = card.querySelector("blockquote").textContent;
+      dlg.querySelector("#rm-name").textContent = card.querySelector("figcaption b").textContent;
+      dlg.querySelector(".rm-com").textContent = card.querySelector("figcaption span").textContent;
+      dlg.querySelector(".rm-note").textContent = note ? note.textContent : "";
+      dlg.querySelector(".rm-body").scrollTop = 0; dlg.scrollTop = 0;
+      lock(true);
+      if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+      dlg.classList.remove("closing");
+      dlg.querySelector(".rm-close").focus();
+    }
+    function close() {
+      if (!dlg.open && !dlg.hasAttribute("open")) return;
+      dlg.classList.add("closing");
+      setTimeout(function () {
+        dlg.classList.remove("closing");
+        if (dlg.close) dlg.close(); else dlg.removeAttribute("open");
+      }, 180);
+    }
+    dlg.addEventListener("close", function () {
+      lock(false);
+      if (last && last.focus) last.focus();
+    });
+    dlg.addEventListener("cancel", function (e) { e.preventDefault(); close(); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
+    dlg.querySelector(".rm-close").addEventListener("click", close);
+
+    wall.addEventListener("click", function (e) {
+      var c = e.target.closest(".shot");
+      if (!c || !c.classList.contains("clamped")) return;
+      open(c, e.target.closest(".more") || c.querySelector(".more"));
+    });
+
+    /* phone: dot indicator for the swipe row */
+    var dots = document.createElement("div");
+    dots.className = "dots";
+    cards.forEach(function (c, i) {
+      var d = document.createElement("button");
+      d.type = "button"; d.setAttribute("aria-label", "Go to review " + (i + 1) + " of " + cards.length);
+      d.addEventListener("click", function () { wall.scrollTo({ left: c.offsetLeft - wall.offsetLeft - 20, behavior: "smooth" }); });
+      dots.appendChild(d);
+    });
+    wall.parentNode.insertBefore(dots, wall.nextSibling);
+    function sync() {
+      var x = wall.scrollLeft, best = 0, bd = 1e9;
+      cards.forEach(function (c, i) {
+        var dd = Math.abs((c.offsetLeft - wall.offsetLeft - 20) - x);
+        if (dd < bd) { bd = dd; best = i; }
+      });
+      if (wall.scrollLeft + wall.clientWidth >= wall.scrollWidth - 4) best = cards.length - 1;
+      Array.prototype.forEach.call(dots.children, function (d, i) { d.classList.toggle("on", i === best); });
+    }
+    wall.addEventListener("scroll", function () { requestAnimationFrame(sync); }, { passive: true });
+    window.addEventListener("resize", sync);
+    sync();
+  } catch (err) {}
+})();
