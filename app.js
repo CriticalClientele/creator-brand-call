@@ -1,7 +1,7 @@
 (function () {
   /* scroll reveal: hides only when IntersectionObserver exists; fails safe */
   try {
-    var els = document.querySelectorAll(".kicker,.side,.side-join,.tile,.badge-row,.hcard,.card,.steps li,.wall,.reviews-note");
+    var els = document.querySelectorAll(".kicker,.side,.side-join,.tile,.badge-row,.hcard,.card,.steps li,.wall,.reviews-note,.ty-event,.ty-mock,.ty-card,.ty-help");
     if (!("IntersectionObserver" in window) || !els.length) return;
     els.forEach(function (el) {
       el.classList.add("reveal");
@@ -143,17 +143,71 @@
   }
 
   if (page === "thanks") {
-    /* ---- add-to-calendar link ---- */
-    var cal = document.getElementById("cal-btn");
-    if (C.ADDEVENT_LINK) { cal.href = C.ADDEVENT_LINK; cal.target = "_blank"; cal.rel = "noopener"; }
-    else cal.classList.add("placeholder-btn");
+    var byId = function (id) { return document.getElementById(id); };
+    var hideIf = function (id, flag) { if (flag === false) { var e = byId(id); if (e) e.classList.add("hidden"); } };
 
-    /* ---- per-source email-sender line ---- */
-    var lines = { austin: "Your email will come from Austin's team.", max: "Your email will come from Max's team." };
-    var sl = document.getElementById("sender-line");
-    if (lines[src]) sl.textContent = lines[src]; else sl.classList.add("hidden");
+    /* ---- name from ?n= (first 40 characters, plain text only). No name = "You are in!" and "Hi there," ---- */
+    var nm = (qs.get("n") || "").trim().slice(0, 40);
+    if (nm) {
+      byId("ty-headline").textContent = "You are in, " + nm + "!";
+      document.querySelectorAll(".js-name").forEach(function (el) { el.textContent = nm; });
+    }
 
-    /* ---- step 4: US numbers only. Shows only if ?geo=us, or ?phone= is a +1 number
+    /* ---- sender name order follows the source: Austin and Max for src=austin, else Max and Austin ---- */
+    var fromName = src === "austin" ? "Austin and Max" : "Max and Austin";
+    document.querySelectorAll(".js-sender, .js-from").forEach(function (el) { el.textContent = fromName; });
+
+    /* ---- add-to-calendar buttons: AddEvent base link + "+apple" / "+google" / "+outlook".
+       No link = buttons stay disabled and the "coming soon" line shows ---- */
+    var calLinks = { "cal-apple": "+apple", "cal-google": "+google", "cal-outlook": "+outlook" };
+    var base = (C.ADDEVENT_LINK || "").replace(/\/+$/, "");
+    var soon = byId("cal-soon");
+    if (base) {
+      Object.keys(calLinks).forEach(function (id) {
+        var a = byId(id);
+        a.href = base + calLinks[id];
+        a.target = "_blank"; a.rel = "noopener";
+        a.removeAttribute("aria-disabled"); a.removeAttribute("role");
+      });
+      if (soon) soon.hidden = true;
+    }
+
+    /* ---- help email: both help lines show only when HELP_EMAIL is set ---- */
+    var he = (C.HELP_EMAIL || "").trim();
+    if (he && he.indexOf("[") === -1) {
+      document.querySelectorAll(".js-help-email").forEach(function (a) { a.textContent = he; a.href = "mailto:" + he; });
+      byId("help-stuck").hidden = false;
+    }
+
+    /* ---- date and time chips, time zone row, step 3 label and the text sample all follow EVENT_DATE / EVENT_TIME.
+       If either value does not parse, the built-in defaults in the HTML stay. ---- */
+    (function () {
+      var fill = function (cls, txt) { document.querySelectorAll(cls).forEach(function (el) { el.textContent = txt; }); };
+      var dm = /^\s*([A-Za-z]+),?\s+([A-Za-z]+)\s+(\d{1,2})/.exec(C.EVENT_DATE || "");
+      var tm = /(\d{1,2})(?::(\d{2}))?\s*([AaPp][Mm])\s*CT/.exec(C.EVENT_TIME || "");
+      var fmt = function (h24, mm, zone) {
+        var h = ((h24 % 24) + 24) % 24, ap = h >= 12 ? "PM" : "AM", h12 = h % 12 || 12;
+        return h12 + (mm && mm !== "00" ? ":" + mm : "") + " " + ap + " " + zone;
+      };
+      var wk, mon, day, ct;
+      if (dm) { wk = dm[1].slice(0, 3); mon = dm[2].slice(0, 3); day = dm[3]; fill(".js-dchip", wk + ", " + mon + " " + day); }
+      if (C.EVENT_TIME) fill(".js-tchip", C.EVENT_TIME);
+      if (tm) {
+        var h24 = (parseInt(tm[1], 10) % 12) + (/p/i.test(tm[3]) ? 12 : 0), mm = tm[2] || "00";
+        ct = fmt(h24, mm, "CT");
+        fill(".js-tz", fmt(h24 + 1, mm, "ET") + " · " + fmt(h24 - 1, mm, "MT") + " · " + fmt(h24 - 2, mm, "PT"));
+      }
+      if (dm && ct) {
+        fill(".js-live", mon + " " + day + ", " + ct);
+        fill(".js-sms", wk + " " + mon + " " + day + " at " + ct);
+      }
+    })();
+
+    /* ---- footer toggles, same flags as the registration page ---- */
+    hideIf("sentence-separate", C.SHOW_SEPARATE_COMPANIES);
+    hideIf("sentence-fee", C.SHOW_FEE_SENTENCE);
+
+    /* ---- US numbers only. Shows only if ?geo=us, or ?phone= is a +1 number
        whose area code is not Canadian. Hidden otherwise (default). ---- */
     var CA = "204 226 236 249 250 257 263 279 289 306 343 354 365 367 368 382 403 416 418 428 431 437 438 450 468 474 506 514 519 548 579 581 584 587 604 613 639 647 672 683 705 709 742 753 778 780 807 819 825 867 873 879 902 905 942".split(" ");
     var show4 = (qs.get("geo") || "").toLowerCase() === "us";
@@ -162,7 +216,7 @@
       var d = raw.slice(2);
       show4 = d.length === 10 && /^[2-9]/.test(d) && CA.indexOf(d.slice(0, 3)) === -1;
     }
-    if (!show4) document.getElementById("step-call").classList.add("hidden");
+    if (!show4) byId("step-call").classList.add("hidden");
   }
 })();
 (function () {

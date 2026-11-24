@@ -13,7 +13,8 @@ window.BF26_CONFIG = {
   GHL_FORM_HEIGHT: 900,      // starting height in px; GHL's script resizes it
 
   // Thank-you page
-  ADDEVENT_LINK: "",         // the AddEvent link for the call
+  ADDEVENT_LINK: "",         // the AddEvent link for the call (base link; the page adds +apple / +google / +outlook). Empty = the three calendar buttons show as disabled
+  HELP_EMAIL: "",            // monitored inbox for "Still stuck?" and "Questions about the call?". Empty = those two lines are hidden
 
   // Legal links (footer, small print, consent label)
   TERMS_URL: "",
@@ -26,6 +27,6 @@ window.BF26_CONFIG = {
   // Optional lines. Set to false to hide a line.
   SHOW_HOSTS_BLOCK: true,          // "Your hosts" block
   SHOW_SEPARATE_COMPANIES: true,   // "separate companies" line
-  SHOW_FEE_SENTENCE: true,         // fee disclosure line
+  SHOW_FEE_SENTENCE: false,        // fee disclosure line
   USE_MAX_LINE_FOR_SRC_MAX: true   // Max line swap for ?src=max
 };

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>You are registered.</title>
+<title>You Are In | Free Live Call with Max and Austin</title>
 <link rel="stylesheet" href="styles.css">
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -13,62 +13,134 @@
 <main>
 
   <!-- 1. CONFIRMATION -->
-  <section class="band band-hero hero" data-mood="hero">
+  <section class="band band-hero hero ty-hero" data-mood="hero">
     <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="wrap">
-    <div class="lockup lockup-sm" aria-hidden="true">
-      <div class="lockup-row">
-        <figure class="lk lk-max">
-          <div class="lk-photo">M<img src="assets/max.jpg" alt="" onerror="this.remove()"></div>
-        </figure>
-        <div class="lk-x"><span>&times;</span></div>
-        <figure class="lk lk-austin">
-          <div class="lk-photo">A<img src="assets/austin.jpg" alt="" onerror="this.remove()"></div>
-        </figure>
+    <div class="cheer" role="img" aria-label="Registered">
+      <div class="cheer-badge"><svg viewBox="0 0 52 52" focusable="false" aria-hidden="true"><path pathLength="1" d="M14 27.5 L22.5 36 L39 17"/></svg></div>
+    </div>
+    <h1 id="ty-headline">You are in!</h1>
+    <p class="sub ty-sub">You are registered.</p>
+
+    <div class="ty-event">
+      <p class="ev-title"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="6" width="13" height="12" rx="3"/><path d="M15.5 10.5l6-3.5v10l-6-3.5z"/></svg>Free live call on working with brands</p>
+      <div class="ev-chips">
+        <span class="ev-chip"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span class="js-dchip">Tue, Dec 1</span></span>
+        <span class="ev-chip"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span class="js-tchip">7:00 PM CT</span></span>
+        <span class="ev-chip"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="6" width="13" height="12" rx="3"/><path d="M15.5 10.5l6-3.5v10l-6-3.5z"/></svg><span>Live on Zoom</span></span>
       </div>
+      <p class="ev-tz js-tz">8 PM ET · 6 PM MT · 5 PM PT</p>
     </div>
-    <div class="cheer" aria-hidden="true">
-      <i style="--x:-74px;--y:-46px;--r:35deg;--d:.75s" class="c1"></i>
-      <i style="--x:-58px;--y:-76px;--r:-20deg;--d:.82s" class="c2"></i>
-      <i style="--x:-14px;--y:-92px;--r:60deg;--d:.7s" class="c3"></i>
-      <i style="--x:38px;--y:-84px;--r:-40deg;--d:.88s" class="c1"></i>
-      <i style="--x:76px;--y:-50px;--r:15deg;--d:.78s" class="c2"></i>
-      <i style="--x:84px;--y:-6px;--r:70deg;--d:.72s" class="c3"></i>
-      <i style="--x:68px;--y:40px;--r:-30deg;--d:.9s" class="c1"></i>
-      <i style="--x:34px;--y:72px;--r:50deg;--d:.8s" class="c2"></i>
-      <i style="--x:-22px;--y:76px;--r:-60deg;--d:.74s" class="c3"></i>
-      <i style="--x:-64px;--y:52px;--r:25deg;--d:.86s" class="c1"></i>
-      <i style="--x:-86px;--y:4px;--r:-10deg;--d:.76s" class="c2"></i>
-      <i style="--x:-40px;--y:-70px;--r:80deg;--d:.84s" class="c3"></i>
-      <div class="cheer-badge"><svg viewBox="0 0 52 52" focusable="false"><path pathLength="1" d="M14 27.5 L22.5 36 L39 17"/></svg></div>
-    </div>
-    <h1>You are registered.</h1>
-    <p class="sub js-event">You are in. Max and Austin go live together on [DATE] at [TIME CT].</p>
-    <!-- href comes from ADDEVENT_LINK in config.js -->
-    <a class="btn btn-cal" id="cal-btn" href="#"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Add the call to my calendar</span></a>
     </div>
   </section>
 
-  <!-- 2. STEPS -->
-  <section class="band band-plan" data-mood="plan">
-    <div class="wrap">
-    <ol class="steps timeline">
-      <li><span class="st">Check your email. Your confirmation and your link to join are on the way.</span></li>
-      <li><span class="st">Look in your spam or promotions folder if you do not see it in a few minutes.</span></li>
-      <li><span class="st">If you chose text reminders, you will get one before the call.</span></li>
-      <!-- Step 4 shows only for US numbers (?geo=us or ?phone=+1...). Hidden by default. -->
-      <li id="step-call"><span class="st">A member of the Pured Media team may call the number you gave us about your registration or about booking a one-on-one call.</span></li>
-      <li><span class="st">On <span class="js-event">[DATE]</span>, join us live. Have one question ready.</span></li>
+  <!-- 2. THREE STEPS -->
+  <section class="band ty-band-steps" data-mood="plan">
+    <div class="wrap ty-wide">
+    <ol class="ty-steps">
+
+      <li class="ty-card" id="cal-step">
+        <div class="ty-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></div>
+        <h2>Add to calendar</h2>
+        <div class="ty-btns">
+          <!-- hrefs come from ADDEVENT_LINK in config.js. No link = all three stay disabled -->
+          <a class="btn ty-cal" id="cal-apple" role="link" aria-disabled="true" aria-label="Apple / iPhone"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" stroke="none" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span>Apple</span></a>
+          <a class="btn ty-cal" id="cal-google" role="link" aria-disabled="true" aria-label="Google Calendar"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" stroke="none" d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg><span>Google</span></a>
+          <a class="btn ty-cal" id="cal-outlook" role="link" aria-disabled="true" aria-label="Outlook"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><circle cx="12" cy="12" r="3.6"/></svg><span>Outlook</span></a>
+        </div>
+        <p class="ty-fine" id="cal-soon">Calendar link coming soon.</p>
+      </li>
+
+      <li class="ty-card" id="mail-step">
+        <div class="ty-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg></div>
+        <h2>Check your email</h2>
+        <p class="ty-line">Not there? Check Spam or Promotions.</p>
+        <div class="ty-inbox">
+          <div class="ib-pane ib-main" aria-hidden="true">
+            <div class="ib-row"><i></i><b></b></div>
+            <div class="ib-row hl"><i></i><b></b></div>
+            <div class="ib-row"><i></i><b></b></div>
+          </div>
+          <div class="ib-arrow"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20V5M6 11l6-6 6 6"/></svg><span>Move to Inbox</span></div>
+          <div class="ib-pane ib-spam" aria-hidden="true">
+            <div class="ib-row hl"><i></i><b></b></div>
+          </div>
+        </div>
+        <p class="ty-chip" id="step-sender"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg><span>From: <b class="js-from">Max and Austin</b> · sent by Pured Media</span></p>
+        <p class="ty-fine ty-fine-ico"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6.5" y="2.5" width="11" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg><span>Chose texts? Save our number as "Pured Media."</span></p>
+      </li>
+
+      <li class="ty-card" id="live-step">
+        <div class="ty-ico" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><rect x="2.5" y="6" width="13" height="12" rx="3"/><path d="M15.5 10.5l6-3.5v10l-6-3.5z"/></svg></div>
+        <h2>Join live <span class="js-live">Dec 1, 7 PM CT</span></h2>
+        <p class="ty-row"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg><span>Open the Zoom link in your email.</span></p>
+        <p class="ty-row"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span>Bring a question.</span></p>
+        <p class="ty-fine ty-fine-ico"><svg class="i rec" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="6"/></svg><span>The call may be recorded.</span></p>
+      </li>
+
     </ol>
-    <p id="sender-line"></p>
+
+    <!-- US numbers only (?geo=us, or ?phone= a +1 number with a non-Canadian area code). Hidden by default. -->
+    <p class="ty-call" id="step-call"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="6.5" y="2.5" width="11" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg><span>A Pured Media team member may call you about your registration or about booking a one-on-one call.</span></p>
     </div>
   </section>
 
-  <!-- 3. FOOTER -->
-  <footer class="band band-foot" data-mood="foot">
+  <!-- 3. SAMPLES + HELP -->
+  <section class="band ty-band-mocks" data-mood="plan">
+    <div class="wrap ty-wide">
+    <div class="ty-mocks">
+
+      <div class="ty-mock">
+        <p class="ty-label"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg>Texts</p>
+        <div class="ty-phone" role="img" aria-label="Example text message">
+          <div class="ty-phone-in">
+            <div class="ty-notch" aria-hidden="true"></div>
+            <div class="ty-phead"><div class="ty-av">P</div><span>Pured Media</span></div>
+            <div class="ty-bubble">Pured Media: You're registered for the free live call with hosts Max and Austin, <span class="js-sms">Tue Dec 1 at 7 PM CT</span>. Msg freq varies. Msg&amp;data rates may apply. Reply HELP for help or STOP to opt out.</div>
+          </div>
+        </div>
+        <p class="ty-cap">Only if you chose texts.</p>
+      </div>
+
+      <div class="ty-mock">
+        <p class="ty-label"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg>Email</p>
+        <div class="ty-laptop" role="img" aria-label="Example email">
+          <div class="ty-screen"><div class="ty-screen-in">
+            <div class="ty-subject">You are in: your link for the free call on Dec 1</div>
+            <div class="ty-from"><div class="ty-av ty-av-mail" aria-hidden="true"></div><div><b class="js-sender">Max and Austin</b><small>to me</small></div></div>
+            <div class="ty-mail-body">
+              <p>Hi <span class="js-name">there</span>,</p>
+              <p>You are registered for the free live call with Max and Austin.</p>
+            </div>
+          </div></div>
+          <div class="ty-base" aria-hidden="true"></div>
+        </div>
+        <p class="ty-cap">Sample email.</p>
+      </div>
+
+    </div>
+
+    <section class="ty-help" aria-labelledby="ty-help-h">
+      <div class="ty-q" aria-hidden="true">?</div>
+      <div>
+        <h2 id="ty-help-h">Did not get it?</h2>
+        <ul>
+          <li><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 13h5l1.5 3h5l1.5-3h5v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM12 10V3M8.5 6.5L12 3l3.5 3.5"/></svg><span>Check Spam or Promotions. Move it to your inbox.</span></li>
+          <li id="help-stuck" hidden><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg><span>Still stuck? Email <a class="js-help-email" href="#"></a>.</span></li>
+        </ul>
+      </div>
+    </section>
+    </div>
+  </section>
+
+  <!-- 4. FOOTER -->
+  <footer class="band band-foot ty-footer" data-mood="foot">
     <div class="wrap">
-    <div class="small">
-      <p><a data-link="terms" href="#">Terms</a> · <a data-link="privacy" href="#">Privacy Policy</a></p>
+    <div class="small ty-foot">
+      <p class="ty-foot-links"><a data-link="terms" href="#">Terms</a> · <a data-link="privacy" href="#">Privacy Policy</a></p>
+      <p>Free to attend. No purchase needed.</p>
+      <p>Results vary. No income, brand deal or other result is promised.</p>
+      <p id="sentence-separate">Hosted by Pured Media and Whitelist Wealth, separate companies.</p>
     </div>
     </div>
   </footer>
