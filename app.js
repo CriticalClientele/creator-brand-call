@@ -172,10 +172,10 @@
       if (soon) soon.hidden = true;
     }
 
-    /* ---- help email: both help lines show only when HELP_EMAIL is set ---- */
-    var he = (C.HELP_EMAIL || "").trim();
-    if (he && he.indexOf("[") === -1) {
-      document.querySelectorAll(".js-help-email").forEach(function (a) { a.textContent = he; a.href = "mailto:" + he; });
+    /* ---- help line: shows only when HELP_PHONE is set ---- */
+    var hp = (C.HELP_PHONE || "").trim();
+    if (hp && hp.indexOf("[") === -1) {
+      document.querySelectorAll(".js-help-phone").forEach(function (a) { a.textContent = hp; a.href = "tel:" + hp.replace(/[^\d+]/g, ""); });
       byId("help-stuck").hidden = false;
     }
 

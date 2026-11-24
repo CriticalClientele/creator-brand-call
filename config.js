@@ -14,11 +14,12 @@ window.BF26_CONFIG = {
 
   // Thank-you page
   ADDEVENT_LINK: "",         // the AddEvent link for the call (base link; the page adds +apple / +google / +outlook). Empty = the three calendar buttons show as disabled
-  HELP_EMAIL: "",            // monitored inbox for "Still stuck?" and "Questions about the call?". Empty = those two lines are hidden
+  HELP_EMAIL: "",            // unused for now (the "Still stuck?" line uses HELP_PHONE)
+  HELP_PHONE: "+1 630-326-6335",  // shown on the thank-you "Still stuck?" line as a tel: link. Empty = that line is hidden
 
   // Legal links (footer, small print, consent label)
-  TERMS_URL: "",
-  PRIVACY_URL: "",
+  TERMS_URL: "/terms",
+  PRIVACY_URL: "/privacy",
 
   // Community review cards that have a written OK from the member (ids: dawn, jose, missy, jayson, christina, bridget).
   // Add an id only after the member's reply is saved. Empty = reviews section hidden.

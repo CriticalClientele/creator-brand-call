@@ -781,3 +781,13 @@ body[data-page=thanks] .band.ty-footer{padding:16px 0 20px}
 }
 
 .ty-card h2 .js-live{white-space:nowrap}
+
+/* ---- Legal pages (terms.html, privacy.html): scoped to body[data-page=legal] ---- */
+body[data-page=legal] .legal{padding:36px 0 24px}
+body[data-page=legal] .legal h1{font-size:34px}
+body[data-page=legal] .legal h2{font-size:23px;margin:30px 0 10px}
+body[data-page=legal] .legal p,body[data-page=legal] .legal li{font-size:18px;line-height:1.6;margin:0 0 14px}
+body[data-page=legal] .legal ul{margin:0 0 14px;padding-left:24px}
+body[data-page=legal] .legal .meta{color:var(--muted);font-size:16px}
+body[data-page=legal] .legal a{color:var(--accent)}
+body[data-page=legal] .legal .back{display:inline-block;margin:0 0 18px;font-size:17px}
