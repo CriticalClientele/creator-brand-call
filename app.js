@@ -43,7 +43,7 @@
   var src = (qs.get("src") || "").toLowerCase();
   if (src !== "austin" && src !== "max") src = "";
   if (src) save("bf26_src", src);
-  else if (page === "thanks") src = load("bf26_src") || "";
+  else src = load("bf26_src") || ""; /* keep the source if they visit /terms or reload */
 
   /* ---- [DATE] / [TIME CT] placeholders ---- */
   document.querySelectorAll(".js-event").forEach(function (el) {
@@ -95,51 +95,177 @@
     off("sentence-separate", C.SHOW_SEPARATE_COMPANIES);
     off("sentence-fee", C.SHOW_FEE_SENTENCE);
 
-    /* ---- tracking values: src + UTMs + page URL ---- */
-    var track = { src: src };
-    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(function (k) {
-      track[k] = qs.get(k) || "";
-    });
-    track.lead_source = track.utm_source;
-    track.landing_page_url = location.href.split("#")[0];
-    track.referrer = (document.referrer || "").split("?")[0].slice(0, 200);
+    /* ---- registration form: posts to the Zapier Catch Hook (Zap fans out to GHL + Kit), then goes to /thank-you ---- */
+    (function () {
+      var form = document.getElementById("reg-form");
+      if (!form) return;
+      var errorBox = document.getElementById("reg-error");
+      var WEBHOOK_URL = (C.ZAPIER_WEBHOOK_URL || "").trim();
+      var THANK_YOU_URL = "/thank-you";
+      var label = function (id) { var l = document.querySelector('label[for="' + id + '"] span'); return l ? l.textContent.trim() : ""; };
+      var SMS_TEXT = label("sms_consent");
+      var EMAIL_TEXT = label("email_consent");
 
-    /* hidden inputs in the preview form */
-    document.querySelectorAll("input[data-track]").forEach(function (i) {
-      i.value = track[i.name] || "";
-    });
+      function showError(msg) { errorBox.textContent = msg; errorBox.classList.remove("hidden"); }
 
-    /* ---- GHL form embed ---- */
-    var slot = document.getElementById("form-slot");
-    if (C.GHL_FORM_URL) {
-      var u = new URL(C.GHL_FORM_URL);
-      Object.keys(track).forEach(function (k) { if (track[k]) u.searchParams.set(k, track[k]); });
-      var f = document.createElement("iframe");
-      var id = C.GHL_FORM_ID || "bf26";
-      f.id = "bf26-form";
-      f.src = u.toString();
-      f.title = "Registration form";
-      f.style.minHeight = (C.GHL_FORM_HEIGHT || 900) + "px";
-      f.setAttribute("data-layout", "{'id':'INLINE'}");
-      f.setAttribute("data-trigger-type", "alwaysShow");
-      f.setAttribute("data-activation-type", "alwaysActivated");
-      f.setAttribute("data-deactivation-type", "neverDeactivate");
-      f.setAttribute("data-form-name", C.GHL_FORM_NAME || "");
-      f.setAttribute("data-height", String(C.GHL_FORM_HEIGHT || 900));
-      f.setAttribute("data-layout-iframe-id", "inline-" + id);
-      f.setAttribute("data-form-id", id);
-      slot.innerHTML = "";
-      slot.appendChild(f);
-      var s = document.createElement("script");
-      s.src = "https://link.msgsndr.com/js/form_embed.js";
-      document.body.appendChild(s);
-    } else {
-      var pv = document.getElementById("preview-form");
-      if (pv) pv.addEventListener("submit", function (e) {
+      /* source: explicit ?src= / utm_source wins, else the referrer's host, else "direct". Kept in localStorage so a reload does not re-attribute. */
+      function detectSource(href, referrer, store) {
+        var clean = function (s) { return String(s || "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 30); };
+        var is = function (h, d) { return h === d || h.slice(-(d.length + 1)) === "." + d; };
+        var params; try { params = new URL(href).searchParams; } catch (e) { params = new URLSearchParams(); }
+        var rawTag = params.get("src") || params.get("utm_source") || "";
+        var tag = clean(params.get("src")) || clean(params.get("utm_source"));
+        var host = "", curHost = "";
+        try { var u = new URL(referrer); if (/^https?:$/.test(u.protocol)) host = u.hostname.toLowerCase().replace(/^www\./, ""); } catch (e) {}
+        try { curHost = new URL(href).hostname.toLowerCase(); } catch (e) {}
+        var isSelf = host && (host === curHost || /^creator-brand-call(-[a-z0-9-]+)?\.vercel\.app$/.test(host));
+        var source = "", detail = "", explicit = false;
+        if (tag) { source = tag; detail = rawTag.slice(0, 100); explicit = true; }
+        else if (host && !isSelf) {
+          detail = host;
+          if (["mail.google.com", "outlook.live.com", "outlook.office.com", "mail.yahoo.com", "kit.com", "ck.page"].some(function (d) { return is(host, d); }) || /(^|\.)convertkit[a-z0-9-]*\./.test(host)) source = "email";
+          else if (is(host, "instagram.com")) source = "instagram";
+          else if (is(host, "facebook.com") || is(host, "fb.me")) source = "facebook";
+          else if (is(host, "t.co") || is(host, "x.com") || is(host, "twitter.com")) source = "x";
+          else if (is(host, "tiktok.com")) source = "tiktok";
+          else if (is(host, "youtube.com") || is(host, "youtu.be")) source = "youtube";
+          else if (/(^|\.)google\.[a-z.]+$/.test(host)) source = "google";
+          else if (is(host, "bing.com")) source = "bing";
+          else if (is(host, "discord.com") || is(host, "discordapp.com")) source = "discord";
+          else if (is(host, "skool.com")) source = "skool";
+          else if (is(host, "threads.net")) source = "threads";
+          else if (/(^|\.)linkedin\./.test(host) || is(host, "lnkd.in")) source = "linkedin";
+          else source = host;
+        }
+        var saved = null;
+        try { saved = JSON.parse(store.getItem("bf26_source")); } catch (e) { saved = null; }
+        if (saved && typeof saved.source !== "string") saved = null;
+        var found = { source: source, detail: detail, landing: href };
+        if (source && (explicit || !saved)) { try { store.setItem("bf26_source", JSON.stringify(found)); } catch (e) {} return found; }
+        if (saved && saved.source) return { source: saved.source, detail: saved.detail || "", landing: saved.landing || href };
+        return { source: "direct", detail: "", landing: href };
+      }
+      var SOURCE = detectSource(location.href, document.referrer, (function () { try { return window.localStorage; } catch (e) { return { getItem: function () { return null; }, setItem: function () {} }; } })());
+
+      /* phone: country picker + real number-format check (intl-tel-input, same version as the Oct 23 page). Defaults to US. */
+      var iti = null;
+      if (window.intlTelInput) {
+        iti = window.intlTelInput(document.getElementById("phone"), {
+          initialCountry: "us",
+          countryOrder: ["us", "ca", "gb", "au"],
+          separateDialCode: true,
+          strictMode: true,
+          dropdownContainer: document.body,
+          utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js"
+        });
+      }
+
+      var DISPOSABLE = ["mailinator.com", "guerrillamail.com", "sharklasers.com", "10minutemail.com", "tempmail.com", "temp-mail.org", "yopmail.com", "trashmail.com", "getnada.com", "dispostable.com", "maildrop.cc", "throwawaymail.com", "fakeinbox.com", "mailnesia.com", "emailondeck.com", "moakt.com", "tempail.com", "mohmal.com"];
+      var TYPOS = {
+        "gmial.com": "gmail.com", "gmal.com": "gmail.com", "gmai.com": "gmail.com", "gnail.com": "gmail.com", "gmail.co": "gmail.com", "gmail.con": "gmail.com", "gmail.cm": "gmail.com", "gamil.com": "gmail.com",
+        "yaho.com": "yahoo.com", "yahooo.com": "yahoo.com", "yahoo.con": "yahoo.com", "yahoo.co": "yahoo.com",
+        "hotmial.com": "hotmail.com", "hotmai.com": "hotmail.com", "hotmail.con": "hotmail.com", "hotmail.co": "hotmail.com",
+        "outlok.com": "outlook.com", "outlook.con": "outlook.com", "icloud.con": "icloud.com", "icoud.com": "icloud.com", "aol.con": "aol.com"
+      };
+      var emailWarnedFor = "";
+
+      form.addEventListener("submit", function (e) {
         e.preventDefault();
-        alert("Preview only. Add GHL_FORM_URL in config.js to use the real form.");
+        var btn = form.querySelector('button[type="submit"]');
+        /* honeypot: bots fill it. Fake success, send nothing. */
+        if (form.nickname_hp.value.trim() !== "") { location.href = THANK_YOU_URL; return; }
+        errorBox.classList.add("hidden");
+
+        var fullName = form.full_name.value.trim().replace(/\s+/g, " ").split(" ")
+          .map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(" ");
+        var nameParts = fullName.split(" ");
+        if (nameParts.length < 2) { showError("Please enter your first and last name."); form.full_name.focus(); return; }
+
+        var email = form.email.value.trim().toLowerCase();
+        var domain = email.split("@")[1] || "";
+        if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/.test(email)) { showError("Please enter a valid email address."); form.email.focus(); return; }
+        if (DISPOSABLE.indexOf(domain) > -1) { showError("Please use your real email so you get the call link."); form.email.focus(); return; }
+        if (TYPOS[domain] && emailWarnedFor !== email) {
+          emailWarnedFor = email;
+          form.email.value = email.split("@")[0] + "@" + TYPOS[domain];
+          showError("We fixed a typo in your email to " + form.email.value + ". Check it and press Save your seat again.");
+          form.email.focus();
+          return;
+        }
+
+        /* precise check rejects fake numbers; types 1 mobile, 2 mobile-or-landline (US/CA), 7 VoIP. Falls back to a length check until the rules load. */
+        var phoneDigits = form.phone.value.replace(/\D/g, "");
+        var phone, phoneCountry;
+        if (iti) {
+          var valid = iti.isValidNumberPrecise(), type = iti.getNumberType();
+          if (valid === false || (valid && [1, 2, 7].indexOf(type) === -1) || (valid === null && (phoneDigits.length < 7 || phoneDigits.length > 15))) {
+            showError("Please enter a valid mobile number and check the country."); form.phone.focus(); return;
+          }
+          phone = iti.getNumber() || ("+" + iti.getSelectedCountryData().dialCode + phoneDigits);
+          phoneCountry = (iti.getSelectedCountryData().iso2 || "").toUpperCase();
+        } else {
+          if (phoneDigits.length < 7 || phoneDigits.length > 15) { showError("Please enter a valid mobile number and check the country."); form.phone.focus(); return; }
+          phone = "+" + phoneDigits; phoneCountry = "";
+        }
+
+        if (!WEBHOOK_URL) {
+          console.warn("ZAPIER_WEBHOOK_URL is empty in config.js. Nothing was sent.");
+          showError("Something went wrong. Please try again.");
+          return;
+        }
+
+        btn.disabled = true; btn.style.opacity = ".6";
+        var smsBox = form.sms_consent.checked, emailBox = form.email_consent.checked;
+        var usca = ["US", "CA"].indexOf(phoneCountry) > -1;
+        var smsTag = smsBox && usca ? "sms-ok" : "";
+        var srcVal = src;
+        var data = new URLSearchParams({
+          full_name: fullName,
+          first_name: nameParts[0],
+          last_name: nameParts.slice(1).join(" "),
+          email: email,
+          phone: phone,
+          phone_country: phoneCountry,
+          sms_tag: smsTag,
+          country_tag: usca ? "us-ca" : "international",
+          sms_consent: smsBox ? "yes" : "no",
+          sms_consent_text: smsBox ? SMS_TEXT : "",
+          consent_version: "consent-bf26-v1",
+          consent_timestamp: new Date().toISOString(),
+          user_agent: navigator.userAgent,
+          page_url: location.href,
+          source: SOURCE.source,
+          source_detail: SOURCE.detail,
+          landing_url: SOURCE.landing,
+          webinar: "2026-12-01 Zoom 7PM CT",
+          tag: "dec1-webinar",
+          src: srcVal,
+          src_tag: srcVal === "max" ? "src-max" : srcVal === "austin" ? "src-austin" : "src-unknown",
+          // Kit tag IDs (Zapier's Kit "Add Tag" step needs the ID, not the name). Kit tags created 2026-11-24.
+          kit_src_tag_id: srcVal === "max" ? "26388771" : srcVal === "austin" ? "26388772" : "26388773",
+          consent_tag: smsTag ? "consent-bf26-v1" : "",
+          email_consent: emailBox ? "yes" : "no",
+          email_consent_text: emailBox ? EMAIL_TEXT : "",
+          email_tag: emailBox ? "email-ok" : "email-event",
+          utm_source: qs.get("utm_source") || "",
+          utm_medium: qs.get("utm_medium") || "",
+          utm_campaign: qs.get("utm_campaign") || "",
+          utm_content: qs.get("utm_content") || "",
+          utm_term: qs.get("utm_term") || "",
+          referrer: (document.referrer || "").split("?")[0].slice(0, 200),
+          hp: form.nickname_hp.value.trim()
+        });
+
+        /* form-encoded + no-cors = no preflight, so the browser does not block the cross-site post */
+        fetch(WEBHOOK_URL, { method: "POST", mode: "no-cors", body: data }).then(function () {
+          location.href = THANK_YOU_URL + "?n=" + encodeURIComponent(nameParts[0]) + "&src=" + encodeURIComponent(srcVal) + "&phone=" + encodeURIComponent(phone);
+        }, function (err) {
+          console.error("Registration failed to send", err);
+          btn.disabled = false; btn.style.opacity = "";
+          showError("Something went wrong. Please try again.");
+        });
       });
-    }
+    })();
   }
 
   if (page === "thanks") {

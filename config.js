@@ -5,12 +5,8 @@ window.BF26_CONFIG = {
   EVENT_DATE: "Tuesday, December 1",
   EVENT_TIME: "7:00 PM CT",          // e.g. "7:00 PM CT"  (fills the "[TIME CT]" slot)
 
-  // GHL form: paste the form's hosted URL (the iframe src from GHL > Sites > Forms > Integrate).
-  // Example: "https://api.leadconnectorhq.com/widget/form/AbCdEf123"
-  GHL_FORM_URL: "",
-  GHL_FORM_ID: "",           // the id at the end of that URL (used for the iframe id)
-  GHL_FORM_NAME: "[BF26] Registration",
-  GHL_FORM_HEIGHT: 900,      // starting height in px; GHL's script resizes it
+  // Zapier Catch Hook URL for the registration form (the Zap fans out to GHL + Kit). Empty = the form shows an error and does not submit.
+  ZAPIER_WEBHOOK_URL: "https://hooks.zapier.com/hooks/catch/26178687/45paqe6/",
 
   // Thank-you page
   ADDEVENT_LINK: "",         // the AddEvent link for the call (base link; the page adds +apple / +google / +outlook). Empty = the three calendar buttons show as disabled

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Two communities, one live call on working with brands</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/css/intlTelInput.min.css">
 <link rel="stylesheet" href="styles.css">
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -101,24 +102,9 @@
     <div class="card">
       <h2 class="form-head">Save your seat for Tuesday</h2>
 
-      <!-- ============ GHL FORM EMBED SLOT ============
-           Set GHL_FORM_URL in config.js. The script builds the iframe here and passes
-           src, utm_source, utm_medium, utm_campaign, utm_content, utm_term, lead_source
-           and landing_page_url from this page's URL into the form (hidden fields).
-           Until then, the PREVIEW form below shows the form wording.
-           =============================================== -->
       <div id="form-slot">
-        <form id="preview-form" novalidate>
-          <p class="preview-flag"><strong>PREVIEW ONLY.</strong> Placeholder for the GHL form embed. Add GHL_FORM_URL in config.js and this disappears.</p>
-
-          <input type="hidden" name="src" data-track>
-          <input type="hidden" name="lead_source" data-track>
-          <input type="hidden" name="utm_source" data-track>
-          <input type="hidden" name="utm_medium" data-track>
-          <input type="hidden" name="utm_campaign" data-track>
-          <input type="hidden" name="utm_content" data-track>
-          <input type="hidden" name="utm_term" data-track>
-          <input type="hidden" name="landing_page_url" data-track>
+        <form id="reg-form" novalidate>
+          <p class="form-error hidden" id="reg-error" role="alert"></p>
 
           <div class="field">
             <label for="full_name">Full name</label>
@@ -143,6 +129,11 @@
             <input type="checkbox" id="email_consent" name="email_consent">
             <span>Yes, email me from Max (Pured Media) and Austin (Whitelist Wealth) about this call and what comes after it. I can unsubscribe at any time.</span>
           </label>
+
+          <div aria-hidden="true" id="hp-wrap">
+            <label for="nickname_hp">Nickname (leave this empty)</label>
+            <input autocomplete="off" id="nickname_hp" name="nickname_hp" tabindex="-1" type="text">
+          </div>
 
           <button class="btn" type="submit">Save your seat</button>
         </form>
@@ -176,6 +167,7 @@
   </div>
 </dialog>
 
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/intlTelInput.min.js"></script>
 <script src="config.js"></script>
 <script src="app.js"></script>
 </body>

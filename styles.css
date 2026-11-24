@@ -43,8 +43,12 @@ input[type=text],input[type=email],input[type=tel],select{width:100%;min-height:
 .consent input{flex:0 0 28px;width:28px;height:28px;margin-top:2px}
 .consent a{color:var(--accent)}
 .sender-note{font-size:16px;margin:0 0 10px}
-.preview-flag{background:#FFF3CD;border:2px dashed #B7791F;border-radius:8px;padding:10px 14px;font-size:15px;margin:0 0 18px}
-iframe#bf26-form{width:100%;border:0;display:block}
+.form-error{background:#FDECEC;border:2px solid #B3261E;border-radius:8px;padding:12px 14px;font-size:18px;font-weight:600;color:#7A1510;margin:0 0 18px}
+#hp-wrap{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.iti{width:100%;display:block}
+.iti input[type=tel]{width:100%}
+.iti__country-list,.iti__dropdown-content{font-size:16px}
+.iti__country{padding-top:10px;padding-bottom:10px}
 footer{padding:28px 0 48px;border-top:1px solid var(--line)}
 footer .small{text-align:center}
 footer .small a{margin:0 7px}
